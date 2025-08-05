@@ -1,17 +1,22 @@
-import { Text, View, StyleSheet } from "react-native";
-import Button from "@/components/Button";
-import ImageViewer from "@/components/ImageViewer";
+import { View, StyleSheet } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
+
+import Button from "@/components/Button";
+import ImageViewer from "@/components/ImageViewer";
+import IconButton from "@/components/IconButton";
+import CircleButton from "@/components/CircleButton";
 
 const PlaceholderImage = require('@/assets/images/cosmeticos.png');
 
 export default function Index() {
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
+  const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
+
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ['images'],
       allowsEditing: true,
       quality: 1,
     });
@@ -23,17 +28,38 @@ export default function Index() {
     }
   };
 
+  const onReset = () => {
+    setShowAppOptions(false);
+  };
+
+  const onAddSticker = () => {
+    //funcao a ser implementada futuramente
+  };
+
+  const onSaveImageAsync = async () => {
+     //funcao a ser implementada futuramente
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Bem-vindo ao nosso site!!</Text>
-      <Text style={styles.text}>Seja membro!!</Text>
       <View style={styles.imageContainer}>
         <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
       </View>
+      {showAppOptions ? (
+        <View style={styles.optionsContainer}>
+          <View style={styles.optionsRow}>
+            <IconButton icon="refresh" label="Reset" onPress={onReset}/>
+            <CircleButton onPress={onAddSticker}/>
+            <IconButton icon="save-alt" label="Save" onPress={onSaveImageAsync}/>
+          </View>
+          </View>
+      ) : (
+      
       <View style={styles.footerContainer}>
         <Button theme="primary" label="Coloque a foto" onPress={pickImageAsync} />
-        <Button label="Usar esta foto" />
+        <Button label="Usar esta foto" onPress={() => setShowAppOptions(true)} />
       </View>
+      )}
     </View>
   );
 }
@@ -44,11 +70,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: '#a99ec7'
   },
-  text: {
-    color: 'white',
-    fontSize: 20,
-    fontFamily: 'monospace',
-  },
   imageContainer: {
     flex: 1,
     paddingTop: 28,
@@ -56,6 +77,15 @@ const styles = StyleSheet.create({
   footerContainer: {
     flex: 1 / 3,
     alignItems: 'center',
+  },
+  optionsContainer: {
+    position: 'absolute',
+    bottom: 80,
+  },
+
+  optionsRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   image: {
     width: 320,
