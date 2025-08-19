@@ -6,13 +6,14 @@ import Button from "@/components/Button";
 import ImageViewer from "@/components/ImageViewer";
 import IconButton from "@/components/IconButton";
 import CircleButton from "@/components/CircleButton";
+import EmojiPicker from "@/components/EmojiPicker";
 
 const PlaceholderImage = require('@/assets/images/cosmeticos.png');
 
 export default function Index() {
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
-
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -33,11 +34,14 @@ export default function Index() {
   };
 
   const onAddSticker = () => {
-    //funcao a ser implementada futuramente
+    setIsModalVisible(true);
   };
 
+  const OnModalClose = () => {
+    setIsModalVisible(true);
+  }
   const onSaveImageAsync = async () => {
-     //funcao a ser implementada futuramente
+     
   }
 
   return (
@@ -60,6 +64,9 @@ export default function Index() {
         <Button label="Usar esta foto" onPress={() => setShowAppOptions(true)} />
       </View>
       )}
+      <EmojiPicker isVisible={isModalVisible} onClose={OnModalClose}>
+      {/* a list of emoji component will go here */}
+      </EmojiPicker>
     </View>
   );
 }
