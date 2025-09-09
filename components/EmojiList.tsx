@@ -9,20 +9,45 @@ type Props = {
 
 export default function EmojiPicker({ onSelect, onCloseModal}: Props) {
     const [emoji] = useState<ImageSourcePropType[]>([
-        require("../assets/images/emoji1.png"),
-        require("../assets/images/emoji2.png"),
-        require("../assets/images/emoji3.png"),
-        require("../assets/images/emoji4.png"),
-        require("../assets/images/emoji5.png"),
-        require("../assets/images/emoji6.png"),
+        require("../assets/images/makeup.png"),
+        require("../assets/images/woman.png"),
+        require("../assets/images/cosmetics.png"),
+        require("../assets/images/skincare.png"),
+        require("../assets/images/sunscreen.png"),
+        require("../assets/images/self-care.png"),
     ]);
 
     return (
-        ,FlatList={
+        <FlatList
             horizontal
-            showHorizontalScrollIndicator={Platform.OS === 'web'}
+            showsHorizontalScrollIndicator={Platform.OS === 'web'}
             data={emoji}
-            content
-        }
-    )
+            contentContainerStyle={styles.listContainer}
+            renderItem={({ item, index}) => (
+                <Pressable
+                onPress={() => {
+                    onSelect(item);
+                    onCloseModal();
+                }}>
+                <Image source={item} key={index} style={styles.image} />
+                </Pressable>
+            )}
+        />
+    );
 }
+
+const styles = StyleSheet.create({
+    listContainer: {
+        borderTopRightRadius: 10,
+        borderTopLeftRadius: 10,
+        paddingHorizontal: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    image: {
+        width: 100,
+        height:100,
+        marginRight: 20,
+    },
+});
