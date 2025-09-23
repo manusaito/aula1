@@ -19,6 +19,7 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{headerShown: false}}/>
         <Stack.Screen name="+not-fount" options={{}} />
        </Stack>
+       <StatusBar style="light"/>
      </>
   );
 }
