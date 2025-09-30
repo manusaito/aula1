@@ -42,15 +42,15 @@
         "origin": false
       },
       "eas": {
-        "projectId": "4fcb384e-a2bc-4854-b1da-f1492f5cb740"
+        "projectId": "2a0c7b7f-8724-49c7-95a9-e30f86e1248e"
       }
     },
     "runtimeVersion": {
       "policy": "appVersion"
     },
+    "owner": "emanuellesaito",
     "updates": {
-      "url": "https://u.expo.dev/4fcb384e-a2bc-4854-b1da-f1492f5cb740"
-    },
-    "owner": "manusaito"
+      "url": "https://u.expo.dev/2a0c7b7f-8724-49c7-95a9-e30f86e1248e"
+    }
   }
 }
